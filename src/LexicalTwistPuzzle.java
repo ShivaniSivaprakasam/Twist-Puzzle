@@ -4,12 +4,10 @@ import java.util.Scanner;
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC5 - Word Transformation
+ * UC6 - Character Distribution Analysis
  *
- * If the second word is the reverse of the first,
- * the reversed word is transformed by:
- * 1. Converting to lowercase
- * 2. Replacing vowels with '@'
+ * This program combines both words and counts
+ * vowels and consonants.
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -24,38 +22,28 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter first word: ");
         String firstWord = scanner.nextLine();
 
-        if (firstWord.contains(" ")) {
-            System.out.println(firstWord + " is an invalid word");
-            return;
-        }
-
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        if (secondWord.contains(" ")) {
-            System.out.println(secondWord + " is an invalid word");
-            return;
+        // Combine words
+        String combinedWord =
+                (firstWord + secondWord).toUpperCase();
+
+        int vowelCount = 0;
+        int consonantCount = 0;
+
+        // Count vowels and consonants
+        for (char ch : combinedWord.toCharArray()) {
+
+            if ("AEIOU".indexOf(ch) != -1) {
+                vowelCount++;
+            } else if (Character.isLetter(ch)) {
+                consonantCount++;
+            }
         }
 
-        // Reverse first word
-        String reversedWord =
-                new StringBuilder(firstWord).reverse().toString();
-
-        // Check reverse relationship
-        if (reversedWord.equalsIgnoreCase(secondWord)) {
-
-            // Convert to lowercase
-            String transformed = reversedWord.toLowerCase();
-
-            // Replace vowels with '@'
-            transformed = transformed.replaceAll("[aeiou]", "@");
-
-            // Display transformed word
-            System.out.println(transformed);
-
-        } else {
-            System.out.println("Not a reverse match");
-        }
+        System.out.println("Vowels     : " + vowelCount);
+        System.out.println("Consonants : " + consonantCount);
 
         scanner.close();
     }
