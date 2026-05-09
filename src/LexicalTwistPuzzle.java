@@ -1,15 +1,15 @@
-import java.util.LinkedHashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC7 - Rule Based Output
+ * Main driver class of the application.
  *
- * Outputs characters based on vowel and consonant
- * distribution rules.
+ * Responsibilities:
+ * 1. Accept user inputs
+ * 2. Coordinate validation
+ * 3. Call analyser methods
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -21,71 +21,58 @@ public class LexicalTwistPuzzle {
 
         Scanner scanner = new Scanner(System.in);
 
+        WordValidator validator =
+                new WordValidator();
+
+        LexicalAnalyzer analyzer =
+                new LexicalAnalyzer();
+
+        System.out.println(
+                "===== Lexical Twist Puzzle =====");
+
+        // Read first word
         System.out.print("Enter first word: ");
         String firstWord = scanner.nextLine();
 
+        // Validate first word
+        if (!validator.isValidWord(firstWord)) {
+
+            System.out.println(
+                    firstWord + " is an invalid word");
+
+            return;
+        }
+
+        // Read second word
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        String combinedWord =
-                (firstWord + secondWord).toUpperCase();
+        // Validate second word
+        if (!validator.isValidWord(secondWord)) {
 
-        int vowels = 0;
-        int consonants = 0;
+            System.out.println(
+                    secondWord + " is an invalid word");
 
-        for (char ch : combinedWord.toCharArray()) {
-
-            if ("AEIOU".indexOf(ch) != -1) {
-                vowels++;
-            } else if (Character.isLetter(ch)) {
-                consonants++;
-            }
+            return;
         }
 
-        // Store unique characters preserving order
-        Set<Character> uniqueCharacters =
-                new LinkedHashSet<>();
+        // Reverse match logic
+        if (analyzer.isReverseMatch(
+                firstWord,
+                secondWord)) {
 
-        for (char ch : combinedWord.toCharArray()) {
-            uniqueCharacters.add(ch);
-        }
+            String transformed =
+                    analyzer.transformWord(firstWord);
 
-        int count = 0;
-
-        if (vowels > consonants) {
-
-            for (char ch : uniqueCharacters) {
-
-                if ("AEIOU".indexOf(ch) != -1) {
-                    System.out.print(ch + " ");
-                    count++;
-                }
-
-                if (count == 2) {
-                    break;
-                }
-            }
-
-        } else if (consonants > vowels) {
-
-            for (char ch : uniqueCharacters) {
-
-                if ("AEIOU".indexOf(ch) == -1
-                        && Character.isLetter(ch)) {
-
-                    System.out.print(ch + " ");
-                    count++;
-                }
-
-                if (count == 2) {
-                    break;
-                }
-            }
+            System.out.println(
+                    "Transformed Word: "
+                            + transformed);
 
         } else {
 
-            System.out.println(
-                    "Vowels and consonants are equal");
+            analyzer.analyseWords(
+                    firstWord,
+                    secondWord);
         }
 
         scanner.close();
