@@ -4,10 +4,10 @@ import java.util.Scanner;
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC3 - Validate Single Word Constraint
+ * UC4 - Reverse Relationship Check
  *
- * This program validates that each input contains
- * only a single word.
+ * This program checks whether the second word
+ * is the reverse of the first word.
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -23,7 +23,7 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter first word: ");
         String firstWord = scanner.nextLine();
 
-        // Validate first word
+        // Validation
         if (firstWord.contains(" ")) {
             System.out.println(firstWord + " is an invalid word");
             return;
@@ -33,13 +33,22 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        // Validate second word
+        // Validation
         if (secondWord.contains(" ")) {
             System.out.println(secondWord + " is an invalid word");
             return;
         }
 
-        System.out.println("Inputs accepted successfully.");
+        // Reverse first word
+        String reversedWord =
+                new StringBuilder(firstWord).reverse().toString();
+
+        // Compare ignoring case
+        if (reversedWord.equalsIgnoreCase(secondWord)) {
+            System.out.println("Reverse Match Found");
+        } else {
+            System.out.println("Not a Reverse Match");
+        }
 
         scanner.close();
     }
