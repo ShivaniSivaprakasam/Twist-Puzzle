@@ -4,9 +4,10 @@ import java.util.Scanner;
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC2 - Accept Word Inputs
+ * UC3 - Validate Single Word Constraint
  *
- * This program accepts two words from the user.
+ * This program validates that each input contains
+ * only a single word.
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -14,27 +15,32 @@ import java.util.Scanner;
 
 public class LexicalTwistPuzzle {
 
-    /**
-     * Main method - Entry point of the application
-     */
     public static void main(String[] args) {
 
-        // Create Scanner object for user input
         Scanner scanner = new Scanner(System.in);
 
         // Read first word
         System.out.print("Enter first word: ");
         String firstWord = scanner.nextLine();
 
+        // Validate first word
+        if (firstWord.contains(" ")) {
+            System.out.println(firstWord + " is an invalid word");
+            return;
+        }
+
         // Read second word
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        // Display entered words
-        System.out.println("First Word  : " + firstWord);
-        System.out.println("Second Word : " + secondWord);
+        // Validate second word
+        if (secondWord.contains(" ")) {
+            System.out.println(secondWord + " is an invalid word");
+            return;
+        }
 
-        // Close scanner resource
+        System.out.println("Inputs accepted successfully.");
+
         scanner.close();
     }
 }
