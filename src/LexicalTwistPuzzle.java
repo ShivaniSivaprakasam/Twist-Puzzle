@@ -4,10 +4,12 @@ import java.util.Scanner;
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC4 - Reverse Relationship Check
+ * UC5 - Word Transformation
  *
- * This program checks whether the second word
- * is the reverse of the first word.
+ * If the second word is the reverse of the first,
+ * the reversed word is transformed by:
+ * 1. Converting to lowercase
+ * 2. Replacing vowels with '@'
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -19,21 +21,17 @@ public class LexicalTwistPuzzle {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Read first word
         System.out.print("Enter first word: ");
         String firstWord = scanner.nextLine();
 
-        // Validation
         if (firstWord.contains(" ")) {
             System.out.println(firstWord + " is an invalid word");
             return;
         }
 
-        // Read second word
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        // Validation
         if (secondWord.contains(" ")) {
             System.out.println(secondWord + " is an invalid word");
             return;
@@ -43,11 +41,20 @@ public class LexicalTwistPuzzle {
         String reversedWord =
                 new StringBuilder(firstWord).reverse().toString();
 
-        // Compare ignoring case
+        // Check reverse relationship
         if (reversedWord.equalsIgnoreCase(secondWord)) {
-            System.out.println("Reverse Match Found");
+
+            // Convert to lowercase
+            String transformed = reversedWord.toLowerCase();
+
+            // Replace vowels with '@'
+            transformed = transformed.replaceAll("[aeiou]", "@");
+
+            // Display transformed word
+            System.out.println(transformed);
+
         } else {
-            System.out.println("Not a Reverse Match");
+            System.out.println("Not a reverse match");
         }
 
         scanner.close();
