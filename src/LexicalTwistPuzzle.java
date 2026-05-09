@@ -1,10 +1,12 @@
+import java.util.Scanner;
+
 /**
  * ------------------------------------------------------------
  * Lexical Twist Puzzle
  * ------------------------------------------------------------
- * UC1 - Display Puzzle Title
+ * UC2 - Accept Word Inputs
  *
- * This program displays the application title.
+ * This program accepts two words from the user.
  *
  * Author : Shivani
  * ------------------------------------------------------------
@@ -17,7 +19,22 @@ public class LexicalTwistPuzzle {
      */
     public static void main(String[] args) {
 
-        // Display application title
-        System.out.println("Lexical Twist Puzzle");
+        // Create Scanner object for user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Read first word
+        System.out.print("Enter first word: ");
+        String firstWord = scanner.nextLine();
+
+        // Read second word
+        System.out.print("Enter second word: ");
+        String secondWord = scanner.nextLine();
+
+        // Display entered words
+        System.out.println("First Word  : " + firstWord);
+        System.out.println("Second Word : " + secondWord);
+
+        // Close scanner resource
+        scanner.close();
     }
 }
